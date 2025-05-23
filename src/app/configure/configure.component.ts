@@ -185,6 +185,8 @@ export class ConfigureComponent implements OnInit {
             ? mqttkeyfile.value
             : undefined;
         else delete config.mqttcertFile;
+        if (config.debugComponents) 
+          config.debugComponents = this.debugComponentsFormControl!.value;
       }
     }
   }
