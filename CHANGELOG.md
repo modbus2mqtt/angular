@@ -1,5 +1,9 @@
 # Changelog for angular
 
+## [v0.12.22](https://github.com/modbus2mqtt/angular/tree/v0.12.22) (2025-09-03)
+
+[Full Changelog](https://github.com/modbus2mqtt/angular/compare/v0.12.21...v0.12.22)
+
 ## [v0.12.21](https://github.com/modbus2mqtt/angular/tree/v0.12.21) (2025-09-03)
 
 [Full Changelog](https://github.com/modbus2mqtt/angular/compare/v0.12.20...v0.12.21)
