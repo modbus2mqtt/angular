@@ -265,10 +265,13 @@ export class EntityComponent
         null as string | null,
         Validators.compose([Validators.min(0.001), Validators.max(10000)]),
       ],
+      swapBytes: [false],
+      swapWords: [false]
     })),
       (this.stringPropertiesFormGroup = this.fb.group({
         identExpr: [null as string | null],
         stringlength: [null as number | null, Validators.required],
+         textSwapBytes: [false]
       })),
       (this.selectPropertiesFormGroup = this.fb.group({
         optionModbus: [
@@ -505,6 +508,20 @@ export class EntityComponent
               : EnumNumberFormat.default,
           );
         this.numberPropertiesFormGroup
+          .get("swapBytes")!
+          .setValue(
+            np.swapBytes !== undefined
+              ? np.swapBytes
+              : false
+          );
+        this.numberPropertiesFormGroup
+          .get("swapWords")!
+          .setValue(
+            np.swapWords !== undefined
+              ? np.swapWords
+              : false
+          );
+        this.numberPropertiesFormGroup
           .get("min")!
           .setValue(
             np.identification && np.identification.min !== undefined
@@ -535,6 +552,13 @@ export class EntityComponent
         this.stringPropertiesFormGroup
           .get("identExpr")!
           .setValue(nt.identification ? nt.identification : null);
+        this.stringPropertiesFormGroup
+          .get("textSwapBytes")!
+          .setValue(
+            nt.swapBytes !== undefined
+              ? nt.swapBytes
+              : false
+          );
         break;
       case "Iselect":
         this.allFormGroups.setControl(
@@ -802,6 +826,14 @@ export class EntityComponent
             max: max,
           };
         }
+        if( this.numberPropertiesFormGroup.get("numberFormat")!.value in [EnumNumberFormat.default, EnumNumberFormat.signedInt16]) 
+          this.numberPropertiesFormGroup.get("swapWords")!.disable();
+        else 
+          this.numberPropertiesFormGroup.get("swapWords")!.enable(); 
+        if(this.numberPropertiesFormGroup.get("swapWords")!.value != undefined)
+          enumber.swapWords = this.numberPropertiesFormGroup.get("swapWords")!.value  
+        if(this.numberPropertiesFormGroup.get("swapBytes")!.value != undefined)
+          enumber.swapBytes = this.numberPropertiesFormGroup.get("swapBytes")!.value 
         if (this.numberPropertiesFormGroup.get("deviceClass")!.value != null)
           enumber.device_class =
             this.numberPropertiesFormGroup.get("deviceClass")!.value.name;
@@ -837,6 +869,10 @@ export class EntityComponent
         if (this.stringPropertiesFormGroup.get("identExpr")! !== null) {
           (this.entity.converterParameters as any).identification =
             this.stringPropertiesFormGroup.get("identExpr")!.value;
+
+        if (this.stringPropertiesFormGroup.get("textSwapBytes")! !== null)
+          (this.entity.converterParameters as Itext).swapBytes =
+            this.stringPropertiesFormGroup.get("textSwapBytes")!.value;
         }
         break;
       case "Iselect":

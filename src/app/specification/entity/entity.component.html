@@ -264,6 +264,15 @@
                                 formControlName="step" (change)="onConverterValueChange()">
                         </mat-form-field>
                     </div>
+                    <h3 class="smallfield width150pt"> Byte/Word Order</h3>
+                    <div class="flexrows">
+                        <mat-slide-toggle class="width50 toggleField" formControlName="swapWords"
+                                matTooltip="Swap Words in 32 Bit Values"
+                                (change)="onConverterValueChange()">Swap Word</mat-slide-toggle>
+                         <mat-slide-toggle class="width50 toggleField" formControlName="swapBytes"
+                                matTooltip="Swap Bytes"
+                                (change)="onConverterValueChange()">Swap Bytes</mat-slide-toggle>
+                    </div>
                 </div>
             </form>
         </mat-expansion-panel>
@@ -290,6 +299,12 @@
                         matTooltip="Optional: The entity is identified if the mqttvalue matches the regular expression"
                         formControlName="identExpr" (change)="onConverterValueChange()">
                 </mat-form-field>
+                <div >
+                    <mat-slide-toggle class="width50 toggleField" formControlName="textSwapBytes"
+                        matTooltip="Swap Bytes"
+                        (change)="onConverterValueChange()">Swap Bytes</mat-slide-toggle>                    
+                </div>
+
             </form>
         </mat-expansion-panel>
         <mat-expansion-panel

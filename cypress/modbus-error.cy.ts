@@ -2,14 +2,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from "@angular/common/http";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { ActivatedRoute, provideRouter } from "@angular/router";
+import { provideRouter } from "@angular/router";
 
-import { ISpecificationMethods } from "angular/src/app/services/specificationInterface";
 import { ModbusErrorComponent } from "angular/src/app/modbus-error/modbus-error.component";
 import {
-  Iconfiguration,
-  ImodbusErrorsForSlave,
   ImodbusStatusForSlave,
   ModbusErrorStates,
   ModbusTasks,

@@ -12,7 +12,7 @@ import {
 } from "@modbus2mqtt/specification.shared";
 import { ISpecificationMethods } from "angular/src/app/services/specificationInterface";
 import { EntityComponent } from "angular/src/app/specification/entity/entity.component";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 /**
  * specification methods
  */
@@ -68,6 +68,14 @@ export function setOnEntityNameOrVariableFieldsChangeFunc(
   if (valFunc) specificationMethods.copy2Translation = valFunc;
   else specificationMethods.copy2Translation = () => {};
 }
+export function setOnPostModbusEntityFunc(
+  valFunc?: (entity: ImodbusEntity|undefined) => Observable<ImodbusData>
+) {
+  if (valFunc) specificationMethods.postModbusEntity = valFunc;
+  else specificationMethods.postModbusEntity = () => {return new Subject<ImodbusData>()};
+}
+
+
 let selectEntity: ImodbusEntity = {
   id: 1,
   modbusValue: [4, 1, 1, 1],
@@ -122,4 +130,5 @@ export function beforeEachHelper() {
 export function afterEachEntityHelper() {
   // reset specificationMethods
   setOnEntityNameOrVariableFieldsChangeFunc();
+  setOnPostModbusEntityFunc();
 }
